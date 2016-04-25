@@ -1,0 +1,40 @@
+{
+  "name": "GulpBoilerplate",
+  "version": "1.0.0",
+  "description": "A 'jumping-off' point for our Magento theme workflow",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Wells @ Pinpoint Designs",
+    "repository": {
+    "type": "git",
+    "url": "https://github.com/PinpointDesigns/GulpBoilerplate.git"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "cssnano": "^3.5.2",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-cheerio": "^0.6.2",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-scss-lint": "^0.3.9",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-svgmin": "^1.2.2",
+    "gulp-svgstore": "^6.0.0",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.1",
+    "merge-stream": "^1.0.0",
+    "postcss-cssnext": "^2.5.1",
+    "postcss-font-magician": "^1.4.0"
+  },
+  "dependencies": {
+    "normalize.css": "^4.0.0"
+  }
+}

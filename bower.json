@@ -1,0 +1,26 @@
+{
+  "name": "GulpBoilerplate",
+  "description": "",
+  "main": "index.php",
+  "authors": [
+    "Chris Wells @ Pinpoint Designs"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/PinpointDesigns/",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "breakpoint-sass": "^2.5.0",
+    "susy": "^2.2.2",
+    "normalize-scss": "^3.0.3"
+  },
+  "devDependencies": {
+    "breakpoint-sass": "^2.5.0"
+  }
+}
