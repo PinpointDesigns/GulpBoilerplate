@@ -5,7 +5,6 @@ This is the Gulpfile that I created to smooth out and standardise the workflow f
 
 ## Setup
 1. Install:
- * Make sure you have Ruby installed!
  * [sass](http://sass-lang.com/install)
  * [node.js](https://docs.npmjs.com/getting-started/installing-node)
  * [bower](http://bower.io/#install-bower)
@@ -47,6 +46,9 @@ This deletes everything that has been generated.
 This rebuilds everything from the above tasks.
 
 ##  Changelog
+26-04-2016 - Version 1.0.1
+Readme.rd correction - Ruby is not needed.
+
 25-04-2016  - Version 1.0.0
 Initial commit. Everything works peachy!
 
