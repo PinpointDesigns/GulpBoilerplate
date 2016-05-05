@@ -46,12 +46,15 @@ This deletes everything that has been generated.
 This rebuilds everything from the above tasks.
 
 ##  Changelog
+05-05-2016 - Version 1.0.2
+* Added folders for files
+* Updated Readme.md
+
 26-04-2016 - Version 1.0.1
-Readme.rd correction - Ruby is not needed.
+* Readme.md correction - Ruby is not needed.
 
 25-04-2016  - Version 1.0.0
-Initial commit. Everything works peachy!
-
+* Initial commit. Everything works peachy!
 
 ## Todo
 * Add BrowserSync
