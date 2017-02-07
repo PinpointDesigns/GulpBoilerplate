@@ -1,7 +1,6 @@
 'use strict';
 
-var
-    gulp = require('gulp'),
+var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('autoprefixer'),
     plumber = require('gulp-plumber'),
@@ -19,37 +18,61 @@ var
     rename = require('gulp-rename'),
     del = require('del'),
     cssnano = require('cssnano'),
-    merge = require('merge-stream');
+    merge = require('merge-stream'),
+    sasslint = require('gulp-sass-lint');
 
 var post = [
     fonts({
-        hosted: '../fonts/'
+        hosted: 'fonts/'
     }),
-    autoprefixer,
-    cssnano({
-        discardComments: {
-            removeAll: true
-        }
+    autoprefixer({
+        browsers: ['last 2 versions']
     }),
-    cssnext
+    // cssnano({
+    //     discardComments: {
+    //         removeAll: true
+    //     },
+    //     minimiseWhitespace: true,
+    //     discardDuplicates: true,
+    //     colormin: true,
+    //     discardOverridden: true,
+    //     functionOptimiser: true
+    // }),
+    // cssnext
 ];
 
+
 gulp.task('styles', function () {
-    gulp.src('./scss/{,*/}*.{scss,sass}')
+    gulp.src('web/css/*.scss')
+        .pipe(sasslint())
+        .pipe(sasslint.format())
+        .pipe(sasslint.failOnError())
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss(post))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css'))
-        .pipe(notify({message: 'CSS Processed', onLast: true}));
+        .pipe(gulp.dest('web/css'));
 });
+
+gulp.task('styles_deploy', function () {
+    gulp.src('web/css/*.scss')
+        .pipe(sasslint())
+        .pipe(sasslint.format())
+        .pipe(sasslint.failOnError())
+        .pipe(plumber())
+        .pipe(sass())
+        .pipe(postcss(post))
+        .pipe(gulp.dest('web/css'));
+});
+
 
 gulp.task('images', function () {
     return gulp.src('images/**/*')
         .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest('web/images'))
 });
+
 
 gulp.task('svgsprite', function () {
     gulp.src('svg/icon-*.svg')
@@ -61,9 +84,10 @@ gulp.task('svgsprite', function () {
             },
             parserOptions: {xmlMode: true}
         }))
-        .pipe(svgstore())
-        .pipe(gulp.dest('dist/images'));
+        //.pipe(svgstore()) - commented because Sonassi doesn't allow file_get_contents()
+        .pipe(gulp.dest('web/images'));
 });
+
 
 gulp.task('svgimg', function () {
     return gulp.src('svg/img-*.svg')
@@ -71,8 +95,9 @@ gulp.task('svgimg', function () {
         .pipe(cheerio({
             parserOptions: {xmlMode: true}
         }))
-        .pipe(gulp.dest('dist/images'));
+        .pipe(gulp.dest('web/images'));
 });
+
 
 gulp.task('scripts', function () {
     return gulp.src('js/**/*.js')
@@ -80,19 +105,18 @@ gulp.task('scripts', function () {
         .pipe(jshint.reporter('default'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/js'))
-        .pipe(notify({message: 'Scripts task complete'}));
+        .pipe(gulp.dest('web/js'));
 });
 
-gulp.task('clean', function () {
-    return del(['dist/css', 'dist/js', 'dist/images']);
-});
 
 gulp.task('watch', function () {
     gulp.watch('svg/*.svg', ['svgsprite', 'svgimg']);
     gulp.watch('images/**/*', ['images']);
-    gulp.watch('./scss/{,*/}*.{scss,sass}', ['styles']);
+    gulp.watch(['**/*.scss','!node_modules/**'], ['styles']);
     gulp.watch('js/**/*.js', ['scripts']);
 });
 
-gulp.task('build', ['styles', 'scripts', 'images', 'svgsprite', 'svgimg']);
+
+gulp.task('build', ['styles', 'scripts', 'svgsprite', 'svgimg', 'images']);
+
+gulp.task('deploy', ['styles_deploy', 'scripts', 'svgsprite', 'svgimg', 'images']);

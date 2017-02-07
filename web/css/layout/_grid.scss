@@ -1,0 +1,17 @@
+//@import '../../bower_components/normalize-scss/_normalize.scss';
+@import "../../bower_components/susy/sass/susy";
+@import "../../bower_components/breakpoint-sass/stylesheets/breakpoint";
+
+$susy: (
+        math: 'fluid',
+        container: 1144px,
+        columns: 12,
+        gutters: 1/4,
+        box-sizing: border-box
+);
+
+@include breakpoint-set('no query fallbacks', true);
+
+// Breakpoints
+$tablet: 768px;
+$desktop: 1144px;
